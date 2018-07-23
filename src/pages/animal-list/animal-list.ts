@@ -13,21 +13,35 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-animal-list',
   templateUrl: 'animal-list.html',
 })
+
+class Animal {
+  img : string
+  width: number
+  constructor(img) {
+    this.img = img;
+  }
+}
+
 export class AnimalListPage {
   icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  items: Array<{title: string, info: Animal}>;
+  keys: { [index: string]: Animal } = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.icons = []
-  	this.items = []
-  	for(let i = 1; i < 11; i++) {
-  	  this.icons.push('flask')
-      this.items.push({
-        title: 'MyItem ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[i]
+
+    this.items = [];
+    this.items.push({
+      title: 'Chimpanzee',
+      info: new Animal('img/chimp.jpg'),
+    });
+    this.items.push({
+        title: 'Giraffe',
+        info: new Animal('img/giraffe.jpg'),
       });
-    }
+    this.items.push({
+        title: 'Grizzly Bear',
+        info: new Animal('img/grizzly.jpg'),
+      });
   }
   
   ionViewDidLoad() {

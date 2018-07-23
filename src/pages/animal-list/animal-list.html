@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>animal-list</ion-title>
+    <ion-title>Animal Index</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,9 @@
   <div class="main-content" (swipe)="swipe($event)">
     <ion-list>
       <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-        <ion-icon name="{{item.icon}}" item-left></ion-icon>
+        <ion-thumbnail item-left>
+          <img src="{{item.Animal.img}}">
+        </ion-thumbnail>
         {{item.title}}
         <div class="item-note" item-right>
           {{item.note}}

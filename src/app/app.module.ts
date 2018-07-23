@@ -21,7 +21,6 @@ import { QRScanner } from "@ionic-native/qr-scanner";
     HomePage,
     TabsPage,
     AnimalListPage
-
   ],
   imports: [
     BrowserModule,
