@@ -18,7 +18,7 @@
     <ion-list>
       <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
         <ion-thumbnail item-left>
-          <img src="{{item.Animal.img}}">
+          <img src="{{item.info.img}}">
         </ion-thumbnail>
         {{item.title}}
         <div class="item-note" item-right>

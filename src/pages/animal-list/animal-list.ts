@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the AnimalListPage page.
@@ -14,33 +15,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'animal-list.html',
 })
 
-class Animal {
-  img : string
-  width: number
-  constructor(img) {
-    this.img = img;
-  }
-}
-
 export class AnimalListPage {
   icons: string[];
-  items: Array<{title: string, info: Animal}>;
-  keys: { [index: string]: Animal } = {};
+  items: Array<{title: string, key: string, info: AnimalInfo}>;
+  animals: { [index: string]: AnimalInfo } = {}; // key-animal pairing
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              private storage: Storage) {
+    // Create animals objects
+    this.animals['chimp'] = new AnimalInfo('img/chimp.jpg');
+    this.animals['bear'] = new AnimalInfo('img/grizzly.jpg');
+    this.animals['giraffe'] = new AnimalInfo('img/giraffe.jpg')
+    this.animals['defualt'] = new AnimalInfo('img/defualt.png')
 
     this.items = [];
     this.items.push({
       title: 'Chimpanzee',
-      info: new Animal('img/chimp.jpg'),
+      key: 'defualt',
+      info: this.animals['defualt'],
+
     });
     this.items.push({
         title: 'Giraffe',
-        info: new Animal('img/giraffe.jpg'),
+        key: 'defualt',
+        info: this.animals['defualt'],
       });
     this.items.push({
         title: 'Grizzly Bear',
-        info: new Animal('img/grizzly.jpg'),
+        key: 'defualt',
+        info: this.animals['defualt'],
       });
   }
   
@@ -52,7 +56,7 @@ export class AnimalListPage {
     // this.navCtrl.push(ItemDetailsPage, {
     //   item: item
     // });
-    console.log('Item was pushed');
+    console.log(item.title + " was pushed")
   }
 
   swipe(event) {
@@ -61,4 +65,12 @@ export class AnimalListPage {
     }
   }
 
+}
+
+class AnimalInfo {
+  img : string;
+  width: number;
+  constructor(img) {
+    this.img = img;
+  }
 }

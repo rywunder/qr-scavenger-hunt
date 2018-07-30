@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 import {Subscriber} from "rxjs/Subscriber";
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the ScanQrPage page.
@@ -24,7 +25,8 @@ export class ScanQrPage {
               public navParams: NavParams,
               public viewController: ViewController,
               public qrScanner: QRScanner,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController,
+              private storage: Storage) {
   }
 
 
