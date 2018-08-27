@@ -9,10 +9,15 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AnimalListPage } from '../pages/animal-list/animal-list';
+import { AnimalDetailPageModule } from '../pages/animal-detail/animal-detail.module';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { QRScanner } from "@ionic-native/qr-scanner";
+import { AnimalApiProvider } from '../providers/animal-api/animal-api';
+import { FoundAnimalProvider } from '../providers/found-animal/found-animal';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,10 @@ import { QRScanner } from "@ionic-native/qr-scanner";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AnimalDetailPageModule,
+    HttpClientModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +49,9 @@ import { QRScanner } from "@ionic-native/qr-scanner";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    QRScanner
+    QRScanner,
+    AnimalApiProvider,
+    FoundAnimalProvider
   ]
 })
 export class AppModule {}

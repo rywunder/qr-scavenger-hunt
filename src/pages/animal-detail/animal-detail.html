@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="animal">{{animal.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only style="font-size: 1.7em" 
+      (click)=toggleFound()>
+        <ion-icon [name]="isFound ? 'star':'star-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content>
+   <ion-card *ngIf="animal">
+    <img [src]="animal.picture_path" />
+    <ion-card-header>
+      <h2>{{animal.name}}
+        <ion-badge color="primary">{{animal.location}}</ion-badge>
+      </h2>
+    </ion-card-header>
+    <ion-card-content>{{animal.summary}}</ion-card-content>
+  </ion-card>
+</ion-content>

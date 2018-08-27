@@ -16,13 +16,13 @@
 <ion-content padding>
   <div class="main-content" (swipe)="swipe($event)">
     <ion-list>
-      <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+      <button ion-item *ngFor="let animal of foundAnimals" (click)="goToDetail(animal)">
         <ion-thumbnail item-left>
-          <img src="{{item.info.img}}">
+          <img src="{{animal.picture_path}}">
         </ion-thumbnail>
-        {{item.title}}
+        {{animal.name}}
         <div class="item-note" item-right>
-          {{item.note}}
+          {{animal.location}}
         </div>
       </button>
     </ion-list>

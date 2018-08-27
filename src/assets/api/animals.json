@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Chimpanzee",
+    "location": "Africa",
+    "picture_path": "img/chimp.jpg",
+    "summary": "This monkey is highly intelligent"
+  },
+  {
+    "id": 1,
+    "name": "Giraffe",
+    "location": "Africa",
+    "picture_path": "img/giraffe.jpg",
+    "summary": "The Giraffe has a long neck"
+  },
+  {
+    "id": 2,
+    "name": "Grizzly Bear",
+    "location": "North America",
+    "picture_path": "img/grizzly.jpg",
+    "summary": "These animals can be found hunting in streams during the salmon runs."
+  }
+]
