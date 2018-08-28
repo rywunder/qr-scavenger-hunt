@@ -20,19 +20,15 @@
         <ion-thumbnail item-left>
           <img src="{{animal.picture_path}}">
         </ion-thumbnail>
-        {{animal.name}}
-        <div class="item-note" item-right>
-          {{animal.location}}
-        </div>
+        <h2>{{animal.name}}</h2>
+        <p text-wrap>{{ animal.location }}</p>
       </button>
       <button ion-item *ngFor="let animal of notFoundAnimals" (click)="presentToast()">
         <ion-thumbnail item-left>
           <img src="{{animal.unknown_picture_path}}">
         </ion-thumbnail>
-        {{animal.name}}
-        <div class="item-note" item-right>
-          {{animal.hint}}
-        </div>
+        <h2>{{animal.name}}</h2>
+        <p text-wrap>{{ animal.hint }}</p>
       </button>
     </ion-list>
   </div>

@@ -53,32 +53,37 @@ export class AnimalListPage {
   }
   //Initializes found animals and not found, the HTML will display them
   private initFoundAnimals() {
+    var count: number = 0;
+    var bool_found: boolean = false;
     this.foundAnimalProvider
       .getFoundAnimals()
-      .then(found => (this.foundAnimals = found));
+      .then(found => {
+        this.foundAnimals = found;
+        count = 0;
+        // fill the notFoundAnimals array
+        for (var i = 0; i < this.totalAnimals.length; i++) {
+          bool_found = false;
+          for (var j = this.foundAnimals.length - 1; j >= 0; j--) {
+            if (this.totalAnimals[i].id === this.foundAnimals[j].id)
+            {
+              bool_found = true;
+              break;
+            }
+          }
 
-    var count = 0;
-    // fill the notFoundAnimals array
-    for (var i = 0; i < this.totalAnimals.length; i++) {
-      var found = false;
-      for (var j = this.foundAnimals.length - 1; j >= 0; j--) {
-        if (this.totalAnimals[i].id === this.foundAnimals[j].id)
-        {
-          found = true;
+          if(!bool_found){
+            this.notFoundAnimals[count] = JSON.parse(
+              JSON.stringify(this.totalAnimals[i]));
+            count += 1
+          }
         }
-      }
 
-      if(!found){
-        this.notFoundAnimals[count] = JSON.parse(
-          JSON.stringify(this.totalAnimals[i]));
-        count += 1
-      }
-    }
+        console.log("Size of notFoundAnimals " + this.notFoundAnimals.length)
+        console.log("Size of foundAnimals " + this.foundAnimals.length)
+        console.log("Size of totalAnimals " + this.totalAnimals.length)
+        console.log(this.notFoundAnimals[0].id)
 
-    console.log("Size of notFoundAnimals " + this.notFoundAnimals.length)
-    console.log("Size of foundAnimals " + this.foundAnimals.length)
-    console.log("Size of totalAnimals " + this.totalAnimals.length)
-    console.log(this.notFoundAnimals[0].id)
+      });
   }
 
   goToDetail(animal: IAnimal) {
