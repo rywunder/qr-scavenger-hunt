@@ -7,16 +7,21 @@ import { AnimalApiProvider } from "../../providers/animal-api/animal-api";
 
 import { IAnimal } from "../../interface/IAnimal";
 import { AnimalDetailPage } from "../animal-detail/animal-detail";
+import { ToastController } from "ionic-angular";
 
 
 @IonicPage()
 @Component({
   selector: 'page-animal-list',
   templateUrl: 'animal-list.html',
+  providers: [AnimalApiProvider]
 })
 
 export class AnimalListPage {
   foundAnimals: IAnimal[] = [];
+  notFoundAnimals: IAnimal[] = [];
+  totalAnimals: IAnimal[]= [];
+  private animalSub: any ;
 
   // items: Array<{title: string, key: string, info: AnimalInfo}>;
   // animals: { [index: string]: AnimalInfo } = {}; // key-animal pairing
@@ -25,55 +30,75 @@ export class AnimalListPage {
               public navParams: NavParams,
               private storage: Storage,
               private foundAnimalProvider: FoundAnimalProvider,
-              private animalApiProvider: AnimalApiProvider) {
-  //   // Create animals objects
-  //   this.animals['chimp'] = new AnimalInfo('img/chimp.jpg');
-  //   this.animals['bear'] = new AnimalInfo('img/grizzly.jpg');
-  //   this.animals['giraffe'] = new AnimalInfo('img/giraffe.jpg')
-  //   this.animals['defualt'] = new AnimalInfo('img/defualt.png')
-
-  //   this.items = [];
-  //   this.items.push({
-  //     title: 'Chimpanzee',
-  //     key: 'defualt',
-  //     info: this.animals['defualt'],
-
-  //   });
-  //   this.items.push({
-  //       title: 'Giraffe',
-  //       key: 'defualt',
-  //       info: this.animals['defualt'],
-  //     });
-  //   this.items.push({
-  //       title: 'Grizzly Bear',
-  //       key: 'defualt',
-  //       info: this.animals['defualt'],
-  //     });
+              private animalApiProvider: AnimalApiProvider,
+              public toastCtrl: ToastController) {
   }
   
 
-  // Display all animals from the JSON that we found
+  // Load all the animals from the api
   ionViewDidLoad() {
     console.log('ionViewDidLoad AnimalListPage');
-    this.animalApiProvider.getAnimals().subscribe(data => {
-      this.foundAnimals = data;
-    })
+    this.loadTotalAnimals();
   }
 
-  // ionViewWillEnter() {
-  //   this.initFoundAnimals();
-  // }
+  ionViewWillEnter() {
+    this.initFoundAnimals();
+  }
+  private loadTotalAnimals() {
+    console.log('Load animal');
+    this.animalSub = this.animalApiProvider.getAnimals().subscribe(data => {
+      console.log('called')
+      this.totalAnimals = data;
+    })
+  }
+  //Initializes found animals and not found, the HTML will display them
+  private initFoundAnimals() {
+    this.foundAnimalProvider
+      .getFoundAnimals()
+      .then(found => (this.foundAnimals = found));
 
-  // Initializes our found animals, the HTML will display them
-  // private initFoundAnimals() {
-  //   this.foundAnimalProvider
-  //     .getFoundAnimals()
-  //     .then(found => (this.foundAnimals = found));
-  // }
+    var count = 0;
+    // fill the notFoundAnimals array
+    for (var i = 0; i < this.totalAnimals.length; i++) {
+      var found = false;
+      for (var j = this.foundAnimals.length - 1; j >= 0; j--) {
+        if (this.totalAnimals[i].id === this.foundAnimals[j].id)
+        {
+          found = true;
+        }
+      }
+
+      if(!found){
+        this.notFoundAnimals[count] = JSON.parse(
+          JSON.stringify(this.totalAnimals[i]));
+        count += 1
+      }
+    }
+
+    console.log("Size of notFoundAnimals " + this.notFoundAnimals.length)
+    console.log("Size of foundAnimals " + this.foundAnimals.length)
+    console.log("Size of totalAnimals " + this.totalAnimals.length)
+    console.log(this.notFoundAnimals[0].id)
+  }
 
   goToDetail(animal: IAnimal) {
     this.navCtrl.push(AnimalDetailPage, animal);
     console.log(animal.name + " was pushed")
+  }
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: 'Find the QR code to unlock the animal',
+      duration: 3000
+    });
+    toast.present();
+  }
+  ionViewWillLeave(){
+    if (this.animalSub)
+    {
+       this.animalSub.unsubscribe();
+       console.log("unsubbed")
+    }  
   }
 
   swipe(event) {

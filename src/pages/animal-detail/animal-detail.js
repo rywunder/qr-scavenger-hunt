@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FoundAnimalProvider } from "../../providers/found-animal/found-movie";
+import { FoundAnimalProvider } from "../../providers/found-animal/found-animal";
 var AnimalDetailPage = /** @class */ (function () {
     function AnimalDetailPage(navCtrl, navParams, foundAnimalProvider) {
         this.navCtrl = navCtrl;
@@ -29,7 +29,6 @@ var AnimalDetailPage = /** @class */ (function () {
         this.isFound = !this.isFound;
         this.foundAnimalProvider.toggleFoundAnimal(this.animal);
     };
-    var _a;
     AnimalDetailPage = __decorate([
         IonicPage(),
         Component({
@@ -37,7 +36,8 @@ var AnimalDetailPage = /** @class */ (function () {
             templateUrl: 'animal-detail.html',
         }),
         __metadata("design:paramtypes", [NavController,
-            NavParams, typeof (_a = typeof FoundAnimalProvider !== "undefined" && FoundAnimalProvider) === "function" ? _a : Object])
+            NavParams,
+            FoundAnimalProvider])
     ], AnimalDetailPage);
     return AnimalDetailPage;
 }());

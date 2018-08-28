@@ -30,7 +30,7 @@ export class FoundAnimalProvider {
           : this.addFoundAnimal(animal)
     );
   }
- 
+
   getAnimalKey(animal: IAnimal) {
     return ANIMAL_KEY + animal.id.toString();
   }

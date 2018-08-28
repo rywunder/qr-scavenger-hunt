@@ -3,12 +3,13 @@ import {IonicPage, NavController, NavParams, ToastController, ViewController} fr
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 import {Subscriber} from "rxjs/Subscriber";
 import { Storage } from '@ionic/storage';
+import { AnimalApiProvider } from "../../providers/animal-api/animal-api";
+import { IAnimal } from "../../interface/IAnimal";
+import { FoundAnimalProvider } from "../../providers/found-animal/found-animal";
 
 /**
- * Generated class for the ScanQrPage page.
+ * Scan QR codes and store the animal that is found
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
  */
 
 @IonicPage()
@@ -20,15 +21,33 @@ export class ScanQrPage {
   private isBackMode: boolean = true;
   private isFlashLightOn: boolean = false;
   private scanSub: any;
+  totalAnimals: IAnimal[]= [];
+  keyToAnimal: { [index: string]: IAnimal }  = {};
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewController: ViewController,
               public qrScanner: QRScanner,
               public toastCtrl: ToastController,
-              private storage: Storage) {
+              private storage: Storage,
+              private animalApiProvider: AnimalApiProvider,
+              private foundAnimalProvider: FoundAnimalProvider) {
   }
 
+  // Load all the animals from the api
+  // Load all keys to pair to the animals
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ScanQR');
+    this.animalApiProvider.getAnimals().subscribe(data => {
+      this.totalAnimals = data;
+    })
+
+    for (var i = this.totalAnimals.length - 1; i >= 0; i--) {
+      this.keyToAnimal[this.totalAnimals[i].id.toString()] = this.totalAnimals[i];
+    }
+    console.log(this.totalAnimals)
+    console.log(Object.keys(this.keyToAnimal))
+  }
 
   ionViewWillEnter(){
     this.showCamera();
@@ -41,7 +60,17 @@ export class ScanQrPage {
 
           // start scanning
           this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
+            // The scan must be a key to some animal type.
             this.presentToast(text);
+            if(this.keyToAnimal[text])
+            {
+               this.foundAnimalProvider.toggleFoundAnimal(this.keyToAnimal[text]);
+               this.presentToast("Key is valid");
+            }
+            else
+            {
+              this.presentToast("Sorry, key is invalid!");
+            }
           });
 
           // show camera preview

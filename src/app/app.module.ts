@@ -50,7 +50,6 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     QRScanner,
-    AnimalApiProvider,
     FoundAnimalProvider
   ]
 })

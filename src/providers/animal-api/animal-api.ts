@@ -20,7 +20,7 @@ export class AnimalApiProvider {
     }
   }
  
-  getAnimals(): Observable {
+  getAnimals(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
 }

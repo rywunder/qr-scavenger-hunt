@@ -1,23 +1,29 @@
 [
   {
-    "id": 0,
+    "id": 1234,
     "name": "Chimpanzee",
     "location": "Africa",
     "picture_path": "img/chimp.jpg",
-    "summary": "This monkey is highly intelligent"
+    "summary": "This monkey is highly intelligent",
+    "hint": "Find me by my friend Giraffe",
+    "unknown_picture_path": "img/default.png"
   },
   {
-    "id": 1,
+    "id": 1125,
     "name": "Giraffe",
     "location": "Africa",
     "picture_path": "img/giraffe.jpg",
-    "summary": "The Giraffe has a long neck"
+    "summary": "The Giraffe has a long neck",
+    "hint": "I am found by the tallest tree in the park",
+    "unknown_picture_path": "img/default.png"
   },
   {
-    "id": 2,
+    "id": 3456,
     "name": "Grizzly Bear",
     "location": "North America",
     "picture_path": "img/grizzly.jpg",
-    "summary": "These animals can be found hunting in streams during the salmon runs."
+    "summary": "These animals can be found hunting in streams during the salmon runs.",
+    "hint": "I often like to watch the tram",
+    "unknown_picture_path": "img/default.png"
   }
 ]

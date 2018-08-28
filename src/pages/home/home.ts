@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
 import {ModalController, NavController, ToastController} from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
+import { AnimalApiProvider } from "../../providers/animal-api/animal-api";
+import { IAnimal } from "../../interface/IAnimal";
+import { FoundAnimalProvider } from "../../providers/found-animal/found-animal";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [ AnimalApiProvider ]
 })
 export class HomePage {
+  totalAnimals: IAnimal[] = [];
+  keyToAnimal: { [index: string]: IAnimal }  = {};
   private scanSub: any ;
+  private animalSub: any ;
+
   constructor(public navCtrl: NavController,
               private qrScanner: QRScanner,
               private modalController: ModalController,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private animalApiProvider: AnimalApiProvider,
+              private foundAnimalProvider: FoundAnimalProvider) {
 
   }
 
@@ -24,8 +34,34 @@ export class HomePage {
     }
   }
 
-  ionViewWillEnter(){
+  // Load all the animals from the api
+  // Load all keys to pair to the animals
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HOME');
+    this.loadTotalAnimals();
+  }
 
+  private loadTotalAnimals() {
+    console.log('Load animal');
+    this.animalSub = this.animalApiProvider.getAnimals().subscribe(data => {
+      console.log('called')
+      this.totalAnimals = data;
+      console.log(this.totalAnimals)
+      this.loadKeys();
+    })
+  }
+
+  private loadKeys(){
+    for (var i = this.totalAnimals.length - 1; i >= 0; i--) {
+      this.keyToAnimal[this.totalAnimals[i].id.toString()] = this.totalAnimals[i];
+    }
+    console.log("Keys:")
+    console.log(Object.keys(this.keyToAnimal))
+
+  }
+
+  ionViewWillEnter(){
+    // this.loadTotalAnimals();
     this.showCamera();
     // Optionally request the permission early
     this.qrScanner.prepare()
@@ -37,9 +73,17 @@ export class HomePage {
           // start scanning
            this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
             console.log('Scanned something', text);
-           // this.qrScanner.hide(); // hide camera preview
-           // scanSub.unsubscribe(); // stop scanning
+           // The scan must be a key to some animal type.
             this.presentToast(text);
+            if(this.keyToAnimal[text])
+            {
+               this.foundAnimalProvider.toggleFoundAnimal(this.keyToAnimal[text]);
+               this.presentToast("Key is valid");
+            }
+            else
+            {
+              this.presentToast("Sorry, key is invalid!");
+            }
           });
 
           // show camera preview
@@ -86,6 +130,10 @@ export class HomePage {
     if (this.scanSub)
     {
        this.scanSub.unsubscribe(); // stop scanning
+    }  
+    if (this.animalSub)
+    {
+       this.animalSub.unsubscribe(); // stop scanning
     }  
     this.hideCamera();
   }

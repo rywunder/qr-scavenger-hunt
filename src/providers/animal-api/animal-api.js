@@ -17,10 +17,10 @@ var AnimalApiProvider = /** @class */ (function () {
         this.baseUrl = "../../assets/api/animals.json";
         console.log("Hello AnimalApiProvider Provider");
         if (this.platform.is("cordova") && this.platform.is("android")) {
-            this.baseUrl = "/android_asset/www/assets/api/movies.json";
+            this.baseUrl = "/android_asset/www/assets/api/animals.json";
         }
     }
-    AnimalApiProvider.prototype.getMovies = function () {
+    AnimalApiProvider.prototype.getAnimals = function () {
         return this.http.get("" + this.baseUrl);
     };
     AnimalApiProvider = __decorate([
