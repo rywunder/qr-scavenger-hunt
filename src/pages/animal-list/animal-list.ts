@@ -55,35 +55,35 @@ export class AnimalListPage {
   private initFoundAnimals() {
     var count: number = 0;
     var bool_found: boolean = false;
+    this.notFoundAnimals = []
     this.foundAnimalProvider
       .getFoundAnimals()
       .then(found => {
-        this.foundAnimals = found;
-        count = 0;
-        // fill the notFoundAnimals array
-        for (var i = 0; i < this.totalAnimals.length; i++) {
-          bool_found = false;
-          for (var j = this.foundAnimals.length - 1; j >= 0; j--) {
-            if (this.totalAnimals[i].id === this.foundAnimals[j].id)
-            {
-              bool_found = true;
-              break;
-            }
-          }
-
-          if(!bool_found){
-            this.notFoundAnimals[count] = JSON.parse(
-              JSON.stringify(this.totalAnimals[i]));
-            count += 1
-          }
-        }
-
-        console.log("Size of notFoundAnimals " + this.notFoundAnimals.length)
-        console.log("Size of foundAnimals " + this.foundAnimals.length)
-        console.log("Size of totalAnimals " + this.totalAnimals.length)
-        console.log(this.notFoundAnimals[0].id)
-
+        this.foundAnimals = found
       });
+    count = 0;
+    // fill the notFoundAnimals array
+    for (var i = 0; i < this.totalAnimals.length; i++) {
+      bool_found = false;
+      for (var j = this.foundAnimals.length - 1; j >= 0; j--) {
+        if (this.totalAnimals[i].id === this.foundAnimals[j].id)
+        {
+          bool_found = true;
+          break;
+        }
+      }
+
+      if(!bool_found){
+        this.notFoundAnimals[count] = JSON.parse(
+          JSON.stringify(this.totalAnimals[i]));
+        count += 1
+      }
+    }
+
+    console.log("Size of notFoundAnimals " + this.notFoundAnimals.length)
+    console.log("Size of foundAnimals " + this.foundAnimals.length)
+    console.log("Size of totalAnimals " + this.totalAnimals.length)
+    console.log(this.notFoundAnimals[0].id)
   }
 
   goToDetail(animal: IAnimal) {
@@ -112,12 +112,4 @@ export class AnimalListPage {
     }
   }
 
-}
-
-class AnimalInfo {
-  img : string;
-  width: number;
-  constructor(img) {
-    this.img = img;
-  }
 }

@@ -65,11 +65,11 @@ export class ScanQrPage {
             if(this.keyToAnimal[text])
             {
                this.foundAnimalProvider.toggleFoundAnimal(this.keyToAnimal[text]);
-               this.presentToast("Key is valid");
+               this.presentToast("You have found the " + this.keyToAnimal[text].name);
             }
             else
             {
-              this.presentToast("Sorry, key is invalid!");
+              this.presentToast("Sorry, code is invalid!");
             }
           });
 
