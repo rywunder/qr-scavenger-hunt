@@ -6,10 +6,27 @@
   </ion-navbar>
 </ion-header>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('https://studio.code.org/v3/assets/-BMKFG2AjEcQtTxLhIIE_SXDCVzXWAoV-OdfPuAy7Vk/Background.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+
 <ion-content padding>
-	<div class="main-content" (swipe)="swipe($event)">
-		<h1> Ryan's Zoo </h1>
-		<h3>Hours:</h3>
-		<h5>9am - 5pm</h5>
-	</div>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top w3-center">Ryan's Zoo</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center" >9am - 4pm</p>
+  </div>
+</div>
 </ion-content>

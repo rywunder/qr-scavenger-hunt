@@ -42,8 +42,23 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  white: 	  #ffffff
 );
+
+$toolbar-ios-background: #55595e;
+$toolbar-md-background: #55595e;
+$toolbar-wp-background: #55595e;
+$tabs-background: #55595e;
+$tabs-md-tab-color-active: #ffffff;
+$tabs-md-tab-color-inactive:  #a8a8a8;
+$tabs-ios-tab-color-active: #ffffff;
+$tabs-ios-tab-color-inactive:  #a8a8a8;
+$tabs-wp-tab-color-active: #ffffff;
+$tabs-wp-tab-color-inactive:  #a8a8a8;
+
+// $header-first-color: #AAAAAA;
+// $header-last-color: #000000;
 
 
 // App iOS Variables
