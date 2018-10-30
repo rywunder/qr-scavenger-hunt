@@ -39,10 +39,6 @@ Next scan the QR code below to see it in action. The QR codes must match the ids
 
 * **Ryan Wunderly** - *Initial work* - [rywunder](https://github.com/rywunder)
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
 * I learned how to develop in Ionic thanks to the wonderful blog post [HERE](http://blog.soat.fr/2017/12/ionic-3-creez-votre-application-mobile/)
