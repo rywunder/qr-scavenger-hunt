@@ -8,7 +8,17 @@ I came up with this idea as I was walking in the San Diego zoo. I love the zoo, 
 Right now the JSON file containing all the information for animals is stored locally. The next step will be to get animal data from a service like the [Encyclopedia of Life](http://eol.org/api). That way users can create animal collections for each zoo. 
 
 ## Screenshots
-
+<div class="row">
+  <div class="column">
+    <img src="https://github.com/rywunder/qr-scavenger-hunt/blob/master/docs/images/animalList.png" hspace="20" width="200">
+  </div>
+  <div class="column">
+    <img src="https://github.com/rywunder/qr-scavenger-hunt/blob/master/docs/images/animalDetail.png" hspace="20" width="200">
+  </div>
+  <div class="column">
+    <img src="https://github.com/rywunder/qr-scavenger-hunt/blob/master/docs/images/aboutScreen.png" hspace="20" width="200">
+  </div>
+</div>
 
 ## Built With
 
