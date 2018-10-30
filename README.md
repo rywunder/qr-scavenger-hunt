@@ -7,6 +7,16 @@ I came up with this idea as I was walking in the San Diego zoo. I love the zoo, 
 ## Future plans for project
 Right now the JSON file containing all the information for animals is stored locally. The next step will be to get animal data from a service like the [Encyclopedia of Life](http://eol.org/api). That way users can create animal collections for each zoo. 
 
+## Using the project
+After cloning the project, plug in your smartphone with a usb to your computer. Make sure the phone has developer mode enabled. Then use the command below to run on your physical device
+```
+ionic cordova run android
+```
+Next scan the QR code below to see it in action. The QR codes must match the ids in `src/assets/api/animals.json`
+
+<img src="https://github.com/rywunder/qr-scavenger-hunt/blob/master/docs/images/qr-monkey.png" hspace="20" width="200" align="middle">
+
+
 ## Screenshots
 <div class="row">
   <div class="column">
